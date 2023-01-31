@@ -1,0 +1,19 @@
+<mat-list-item>
+  <mat-checkbox [checked]="done"></mat-checkbox>
+  <p>{{name}}</p>
+  <button (click)="onDelete()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+    <mat-icon>delete</mat-icon>
+  </button>
+  <button (click)="openUpdateBox()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+    <mat-icon>edit</mat-icon>
+  </button>
+</mat-list-item>
+<ng-container *ngIf="isEditMode">
+  <mat-form-field appearance="outline">
+    <input #input [value]="name" matInput placeholder="Placeholder">
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+  </mat-form-field>
+  <button (click)="onUpdate(input)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+    <mat-icon>done</mat-icon>
+  </button>
+</ng-container>

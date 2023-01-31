@@ -1,0 +1,13 @@
+mat-card{
+  width: 450px;
+  margin: auto;
+}
+
+mat-form-field{
+  width: 100%;
+}
+
+mat-paginator{
+  width: 450px;
+  margin: auto;
+}

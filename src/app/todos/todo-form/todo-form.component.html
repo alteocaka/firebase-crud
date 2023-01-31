@@ -1,0 +1,9 @@
+<mat-card>
+    <h3>Add new todo...</h3>
+    <mat-form-field appearance="outline">
+      <input #value matInput placeholder="Todo...">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+    <button (click)="onFormSubmit(value)" mat-raised-button color="primary">Submit</button>
+</mat-card>
+
