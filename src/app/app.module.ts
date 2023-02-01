@@ -24,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TodoFormComponent } from './todos/todo-form/todo-form.component';
 import { MatCardModule } from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     AngularFireStorageModule,
     AngularFirestoreModule,
     AngularFireDatabaseModule,
+    FormsModule,
     BrowserModule,
     MatListModule,
     MatCheckboxModule,

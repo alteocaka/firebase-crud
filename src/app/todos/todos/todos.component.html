@@ -1,6 +1,6 @@
 <mat-card>
   <mat-form-field appearance="outline">
-    <input (keyup)="onSearch(value.value)" #value matInput placeholder="Search Todo...">
+    <input (keyup)="onSearch(searchInput)" [(ngModel)]="searchInput" #value matInput placeholder="Search Todo...">
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
   <mat-list>

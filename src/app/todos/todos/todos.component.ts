@@ -10,15 +10,16 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class TodosComponent implements OnInit {
   paginator = {
-    length: 0,
+    length,
     pageSize: 10,
     pageIndex: 0,
-    pageSizeOptions: [3, 5, 10],
+    pageSizeOptions: [3, 10, 20],
     hidePageSize: false,
     showPageSizeOptions: true,
     showFirstLastButtons: true,
     disabled: false,
   };
+  searchInput!: string;
   pageEvent!: PageEvent;
   todos$!: Observable<any>;
   searchedTodos$!: Observable<any>;
@@ -31,22 +32,24 @@ export class TodosComponent implements OnInit {
 
   constructor(private todoService: TodoService) {}
 
+  ngOnInit(): void {
+    this.todos$ = this.todoService.getAllTodos(this.paginator, '');
+    this.getTotalUsersCounter();
+  }
+
+  async getTotalUsersCounter() {
+    const data = await this.todoService.getTotalUsers();
+    (this.paginator.length = data),
+      console.log('Counter: ', data, this.paginator.length);
+  }
+
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     this.paginator.length = e.length;
     this.paginator.pageSize = e.pageSize;
     this.paginator.pageIndex = e.pageIndex;
-    this.todos$ = this.todoService.getAllTodos(this.paginator);
+    this.todos$ = this.todoService.getAllTodos(this.paginator, this.searchInput);
     console.log('Paginator: ', this.paginator);
-  }
-
-  ngOnInit(): void {
-    this.todos$ = this.todoService.getAllTodos(this.paginator);
-    this.todos$.subscribe((data: any) => this.paginator.length = data.length);
-  }
-
-  log(){
-    console.log('Next')
   }
 
   onSearch(keyword: string) {
@@ -55,7 +58,7 @@ export class TodosComponent implements OnInit {
       debounceTime(500)
     );
     if (keyword === '') {
-      this.todos$ = this.todoService.getAllTodos(this.paginator);
+      this.todos$ = this.todoService.getAllTodos(this.paginator, keyword);
     }
   }
 
